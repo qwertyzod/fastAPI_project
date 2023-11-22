@@ -1,7 +1,16 @@
-from datetime import datetime
 from sqlalchemy import MetaData, Integer, String, ForeignKey, Table, Column, JSON, TIMESTAMP
+from datetime import datetime
+
 
 metadata = MetaData()
+
+roles = Table(
+    "roles",
+    metadata,
+    Column("id", Integer, primary_key=True),
+    Column("name", String(100), nullable=False),
+    Column("permissions", JSON),
+)
 
 users = Table(
     "users",
