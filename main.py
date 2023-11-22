@@ -1,6 +1,8 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+app = FastAPI(
+    title="Test project FastAPI",
+)
 
 
 @app.get("/")
