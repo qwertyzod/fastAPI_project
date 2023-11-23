@@ -1,10 +1,10 @@
 import os
 from pathlib import Path
 
-import pkg_resources
 from alembic.config import Config
 
 from src.settings import settings
+
 
 def get_alembic_config_from_db_url(db_url: str) -> Config:
     """Возвращает конфигурацию для Alembic"""

@@ -10,6 +10,7 @@ from src.database.base import Base
 if TYPE_CHECKING:
     from src.roles.models import Role
 
+
 class User(Base):
     __tablename__: str = 'user'
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -19,4 +20,3 @@ class User(Base):
 
     role: Mapped['Role'] = relationship(back_populates="user", lazy="joined")
     role_id: Mapped[int] = mapped_column(ForeignKey('role.id', ondelete='CASCADE', onupdate='CASCADE'))
-

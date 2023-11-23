@@ -1,10 +1,12 @@
 from collections.abc import AsyncGenerator
 
 from sqlalchemy.exc import SQLAlchemyError
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import (AsyncSession, create_async_engine,
+                                    async_sessionmaker)
 
 from src.settings import settings
 from src.utils import get_alembic_config_from_db_url
+
 
 class DatabaseHelper:
 
@@ -25,7 +27,8 @@ class DatabaseHelper:
         yield: сессия
 
         Raise:
-            SQLAlchemyError: если произошла ошибка при подключении или при работе с базой данных
+            SQLAlchemyError: если произошла ошибка при подключении
+            или при работе с базой данных
         """
         async with self.session_factory() as session:
             try:

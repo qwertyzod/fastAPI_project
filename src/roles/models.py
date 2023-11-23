@@ -9,6 +9,7 @@ from src.database.base import Base
 if TYPE_CHECKING:
     from src.users.models import User
 
+
 class Role(Base):
     __tablename__ = 'role'
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

@@ -1,5 +1,6 @@
 from pydantic import BaseModel, EmailStr
 
+
 class UserBaseSchema(BaseModel):
     """Базовая схема пользователя"""
     name: str

@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 env_file = f"{Path(__file__).parent.parent}/.env"
 
+
 class Settings(BaseSettings):
     DB_USER: str
     DB_PASSWORD: str
