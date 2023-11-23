@@ -7,7 +7,6 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from src.database.base import Base
 
 
-
 if TYPE_CHECKING:
     from src.roles.models import Role
 
