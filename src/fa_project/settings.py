@@ -2,7 +2,7 @@ from pathlib import Path
 
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
-env_file = f"{Path(__file__).parent.parent}/.env"
+env_file = f"{Path(__file__).parent.parent.parent}/.env"
 
 
 class Settings(BaseSettings):
@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     DB_HOST: str
     DB_PORT: int
     project_name: str = "FastAPI Project"
+    SECRET: str
+    DEBUG: bool
 
     model_config = SettingsConfigDict(env_file=env_file, env_file_encoding='utf-8')
 

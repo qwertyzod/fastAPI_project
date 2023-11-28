@@ -3,7 +3,7 @@ from pathlib import Path
 
 from alembic.config import Config
 
-from src.settings import settings
+from src.fa_project import settings
 
 
 def get_alembic_config_from_db_url(db_url: str) -> Config:
