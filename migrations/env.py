@@ -6,7 +6,7 @@ from sqlalchemy import pool
 
 from alembic import context
 from sqlalchemy.engine import Connection
-from src.fa_project.database.base import Base
+from src.fa_project import Base
 from src.fa_project.settings import settings
 
 # this is the Alembic Config object, which provides

@@ -8,6 +8,7 @@ class UserRead(schemas.BaseUser[uuid.UUID]):
 
 
 class UserCreate(schemas.BaseUserCreate):
+    name: str
     role_id: int
 
 

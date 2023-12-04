@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from fa_project.roles.models import Role
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
+    __table_args__ = {'extend_existing': True}
     name: Mapped[str] = mapped_column(String(100), nullable=False)
     email: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[datetime] = mapped_column(default=datetime.utcnow)

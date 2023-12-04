@@ -15,11 +15,10 @@ class Settings(BaseSettings):
     SECRET: str
     DEBUG: bool
 
-    model_config = SettingsConfigDict(env_file=env_file, env_file_encoding='utf-8')
+    model_config = SettingsConfigDict(env_file=env_file, env_file_encoding='utf-8', extra='ignore')
 
     @property
     def db_url(self) -> str:
-        """Возвращает URL для подключения к базе данных"""
         return f'postgresql+asyncpg://{self.DB_USER}:{self.DB_PASSWORD}@{self.DB_HOST}:{self.DB_PORT}/{self.DB_NAME}'
 
 
