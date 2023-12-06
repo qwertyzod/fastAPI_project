@@ -3,7 +3,6 @@ import uuid
 import uvicorn
 from fastapi import FastAPI
 from fastapi_users import FastAPIUsers
-from starlette.middleware.cors import CORSMiddleware
 
 from fa_project.auth.auth import auth_backend
 from fa_project.settings import settings

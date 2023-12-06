@@ -10,6 +10,7 @@ from fa_project.database.base import Base
 if TYPE_CHECKING:
     from fa_project.roles.models import Role
 
+
 class User(SQLAlchemyBaseUserTableUUID, Base):
     __table_args__ = {'extend_existing': True}
     name: Mapped[str] = mapped_column(String(100), nullable=False)

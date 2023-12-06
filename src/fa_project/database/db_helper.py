@@ -30,6 +30,7 @@ class DatabaseHelper:
                 await session.rollback()
                 raise SQLAlchemyError(error)
 
+
 db_helper = DatabaseHelper(db_url=settings.db_url, echo=settings.DEBUG)
 async_session = db_helper.session_dependency
 

@@ -8,6 +8,7 @@ from fa_project.database.base import Base
 if TYPE_CHECKING:
     from fa_project.users.models import User
 
+
 class Role(Base):
     __tablename__ = 'role'
     __table_args__ = {'extend_existing': True}
