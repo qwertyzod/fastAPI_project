@@ -5,10 +5,10 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from sqlalchemy import String, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
-from fa_project.database.base import Base
+from src.fa_project.database.base import Base
 
 if TYPE_CHECKING:
-    from fa_project.roles.models import Role
+    from roles.models import Role
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):

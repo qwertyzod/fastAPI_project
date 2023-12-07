@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     project_name: str = "FastAPI Project"
     SECRET: str
     DEBUG: bool
+    SERVER_HOST: str
+    SERVER_PORT: int
 
     model_config = SettingsConfigDict(env_file=env_file, env_file_encoding='utf-8', extra='ignore')
 
