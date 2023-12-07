@@ -4,9 +4,9 @@ from typing import Optional
 from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin
 
-from fa_project.users.models import User
-from fa_project.database.db_helper import get_user_db
-from fa_project.settings import settings
+from users.models import User
+from database.db_helper import get_user_db
+from settings import settings
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
