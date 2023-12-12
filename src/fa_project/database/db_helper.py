@@ -6,7 +6,7 @@ from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
 from settings import settings
-from users.models import User
+from src.fa_project.users.models import User
 
 
 class DatabaseHelper:

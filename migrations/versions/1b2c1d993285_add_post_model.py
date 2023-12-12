@@ -28,7 +28,7 @@ def upgrade() -> None:
     sa.Column('image', sa.String(), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.add_column('user', sa.Column('post_id', sa.Integer(), nullable=False))
+    op.add_column('user', sa.Column('post_id', sa.Integer(), nullable=True))
     op.create_foreign_key('fk_user_post_id', 'user', 'posts', ['post_id'], ['id'], onupdate='CASCADE', ondelete='CASCADE')
 
     role = Base.metadata.tables['role']

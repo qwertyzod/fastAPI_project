@@ -6,7 +6,7 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from src.fa_project.database.base import Base
 
 if TYPE_CHECKING:
-    from fa_project.users.models import User
+    from src.fa_project.users.models import User
 
 
 class Role(Base):

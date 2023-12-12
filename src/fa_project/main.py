@@ -7,7 +7,7 @@ from fastapi_users import FastAPIUsers
 from auth.auth import auth_backend
 from settings import settings
 from users.manager import get_user_manager
-from users.models import User
+from src.fa_project.users.models import User
 from users.schemas import UserRead, UserCreate
 
 fastapi_users = FastAPIUsers[User, uuid.UUID](get_user_manager, [auth_backend])

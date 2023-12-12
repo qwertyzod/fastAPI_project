@@ -21,4 +21,4 @@ class User(SQLAlchemyBaseUserTableUUID, Base):
     role_id: Mapped[int] = mapped_column(ForeignKey('role.id', ondelete='CASCADE', onupdate='CASCADE', name='fk_user_role_id'))
 
     post: Mapped['Post'] = relationship(back_populates="user", lazy="joined")
-    post_id: Mapped[int] = mapped_column(ForeignKey('posts.id', ondelete='CASCADE', onupdate='CASCADE', name='fk_user_post_id'))
+    post_id: Mapped[int] = mapped_column(ForeignKey('posts.id', ondelete='CASCADE', onupdate='CASCADE', name='fk_user_post_id'), nullable=True)
