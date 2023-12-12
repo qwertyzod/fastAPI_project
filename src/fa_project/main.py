@@ -10,6 +10,8 @@ from settings import settings
 from src.fa_project.users.manager import get_user_manager
 from src.fa_project.users.models import User
 from src.fa_project.users.schemas import UserRead, UserCreate
+from pages.router import router as router_pages
+
 
 fastapi_users = FastAPIUsers[User, uuid.UUID](get_user_manager, [auth_backend])
 
@@ -46,6 +48,8 @@ app.include_router(
     prefix="/auth",
     tags=["auth"],
 )
+
+app.include_router(router_pages)
 
 if __name__ == "__main__":
     uvicorn.run(
