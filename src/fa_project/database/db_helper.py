@@ -5,7 +5,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyUserDatabase
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession, async_sessionmaker
 
-from settings import settings
+from src.fa_project.settings import settings
 from src.fa_project.users.models import User
 
 

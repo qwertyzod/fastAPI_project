@@ -1,6 +1,6 @@
 from fastapi_users.authentication import CookieTransport, AuthenticationBackend, JWTStrategy
 
-from settings import settings
+from src.fa_project.settings import settings
 
 cookie_transport = CookieTransport(
     cookie_name="FastAPI-Auth",
