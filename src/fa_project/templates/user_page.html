@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+{% block head %}
+    <script>
+        function getMainPage() {
+            fetch('/main')
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/main"
+                    }
+                })
+        }
+    </script>
+{% endblock %}
+{%  block content %}
+    <div class="card">
+          <div style="display: flex; justify-content: space-between" class="card-header">
+              <p class="text">Название сайта</p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-primary" id="button-user-page" onclick="getMainPage()">Вернуться на главную</button></button>
+                  <button type="button" class="btn btn-primary" id="button" onclick="logOut()">Выйти</button>
+              </div>
+          </div>
+    </div>
+{% endblock %}

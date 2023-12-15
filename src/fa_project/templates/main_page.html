@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        function getUserPage() {
+            fetch('/token', {
+                method: 'POST',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    fetch(`/profile/${data}`)
+                        .then(response => {
+                            if (response.ok) {
+                                window.location.href = `/profile/${data}`
+                            }
+                        })
+                })
+        }
+
+        function logOut() {
+            fetch('/auth/jwt/logout', {
+                method: 'POST',
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/auth"
+                    }
+                    window.location.reload();
+                })
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div class="card">
+          <div style="display: flex; justify-content: space-between" class="card-header">
+              <p class="text">Название сайта</p>
+              <div class="btn-group" role="group" aria-label="Basic example">
+                  <button type="button" class="btn btn-primary" id="button-user-page" onclick="getUserPage()">Личка</button></button>
+                  <button type="button" class="btn btn-primary" id="button" onclick="logOut()">Выйти</button>
+              </div>
+          </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        function setInputValue() {
+            let dataForAuth = {}
+            dataForAuth.username = document.getElementById("email").value
+            dataForAuth.password = document.getElementById("password").value
+            sendData(dataForAuth)
+        }
+        function sendData(dataForAuth) {
+            let button = document.getElementById('button');
+            fetch('/auth/jwt/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: `username=${dataForAuth.username}&password=${dataForAuth.password}`
+            })
+                .then(response => {
+                    if (response.ok) {
+                        window.location.href = "/main"
+                    }
+                    else if (response.status === 400) {
+                        let heading = document.createElement('h1');
+                        heading.id = 'heading';
+                        heading.textContent = 'Не верная почта или пароль';
+                        heading.style.color = 'red';
+                        if (document.getElementById('heading') === null) {
+                            button.appendChild(heading)
+                        }
+                    }
+                })
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div style="height: 100vh; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+        <h1>Авторизоваться</h1>
+        <div id="container" style="display: flex; flex-direction: column">
+            <input id="email" style="margin-top: 10px; border-radius: 0.25rem" placeholder="Почта">
+            <input id="password" style="margin-top: 10px; border-radius: 0.25rem" placeholder="Пароль">
+            <button id="button" style="margin-top: 10px; border-radius: 0.25rem" onclick="setInputValue()">Войти</button>
+            <h1 style="margin-top: 10px">
+                Нет аккаунта?
+                <a style="text-decoration: underline; color: crimson" href="/registry">Зарегистрироваться</a>
+            </h1>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block head %}
+    <script>
+        function setRegisterValue() {
+            let dataForRegistry = {
+                "email": document.getElementById("email").value,
+                "password": document.getElementById("password").value,
+                "is_active": true,
+                "is_superuser": false,
+                "is_verified": false,
+                "name": document.getElementById("name").value,
+            }
+            sendData(dataForRegistry)
+        }
+
+        function sendData(dataForRegistry) {
+            // let button = document.getElementById('button');
+            console.log(dataForRegistry)
+             fetch('/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataForRegistry)
+            })
+                 .then(response => {
+                     if (response.ok) {
+                         window.location.href = "/auth"
+                     }
+                     else if (response.status === 400) {
+                          console.log(2)
+                     }
+                 })
+        }
+    </script>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <button id="button_auth" onclick="window.location.href = '/auth'">Вернуться к аутентификации</button>
+    </div>
+    <div style="height: 100vh; display: flex; align-items: center; flex-direction: column; justify-content: center;">
+        <input id="name" style="margin-top: 10px; border-radius: 0.25rem" placeholder="ФИО">
+        <input id="email" style="margin-top: 10px; border-radius: 0.25rem" placeholder="Почта">
+        <input id="password" style="margin-top: 10px; border-radius: 0.25rem" placeholder="Пароль">
+        <button id="button" style="width: 180px; height: 40px;outline: 1px solid purple;margin-top: 10px; border-radius: 12px; color: purple" onclick="setRegisterValue()">Зарегистрироваться</button>
+    </div>
+{% endblock %}

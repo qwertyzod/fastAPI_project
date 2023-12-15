@@ -1,12 +1,14 @@
 import uuid
 from typing import Optional
 
-from fastapi import Depends, Request
-from fastapi_users import BaseUserManager, UUIDIDMixin, schemas, models, exceptions
+from fastapi import Depends, Request, status, HTTPException
+from fastapi_users import BaseUserManager, UUIDIDMixin, schemas, models, exceptions, jwt
+from fastapi_users.schemas import model_dump
 
 from src.fa_project.users.models import User
 from database.db_helper import get_user_db
 from settings import settings
+from src.fa_project.users.schemas import UserCreate
 
 
 class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
@@ -17,9 +19,10 @@ class UserManager(UUIDIDMixin, BaseUserManager[User, uuid.UUID]):
         print(f"User {user.id} has registered.")
 
     async def create(self, user_create: schemas.UC, safe: bool = False, request: Optional[Request] = None):
-        user_create.update(role_id = 2)
-        return await super().create(user_create, safe, request)
-
+        user_create_dict = model_dump(user_create)
+        user_create_dict['role_id'] = 2
+        user_create_with_role = UserCreate(**user_create_dict)
+        return await super().create(user_create_with_role, safe, request)
 
 
 async def get_user_manager(user_db=Depends(get_user_db)):

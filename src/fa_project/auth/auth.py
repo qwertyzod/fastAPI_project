@@ -1,4 +1,11 @@
+
 from fastapi_users.authentication import CookieTransport, AuthenticationBackend, JWTStrategy
+import uuid
+
+from fastapi_users import FastAPIUsers
+
+from src.fa_project.users.manager import get_user_manager
+from src.fa_project.users.models import User
 
 from src.fa_project.settings import settings
 
@@ -18,3 +25,5 @@ auth_backend = AuthenticationBackend(
     transport=cookie_transport,
     get_strategy=get_jwt_strategy,
 )
+
+fastapi_users = FastAPIUsers[User, uuid.UUID](get_user_manager, [auth_backend])

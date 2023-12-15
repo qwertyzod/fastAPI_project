@@ -1,19 +1,20 @@
-import uuid
-
 import uvicorn
 from fastapi import FastAPI
-from fastapi_users import FastAPIUsers
+from fastapi.staticfiles import StaticFiles
+
 from fastapi.middleware.cors import CORSMiddleware
 
-from auth.auth import auth_backend
+
+from auth.auth import auth_backend, fastapi_users
 from settings import settings
-from src.fa_project.users.manager import get_user_manager
-from src.fa_project.users.models import User
+
 from src.fa_project.users.schemas import UserRead, UserCreate
 from pages.router import router as router_pages
+from auth.router import router as router_auth
+from posts.views import router as router_posts
 
 
-fastapi_users = FastAPIUsers[User, uuid.UUID](get_user_manager, [auth_backend])
+
 
 app = FastAPI(
     title="Test project FastAPI",
@@ -22,6 +23,8 @@ app = FastAPI(
 origins = [
     "http://localhost:3000",
 ]
+
+app.mount('/static', StaticFiles(directory='src/fa_project/static'), name='static')
 
 app.add_middleware(
     CORSMiddleware,
@@ -43,13 +46,9 @@ app.include_router(
     tags=["auth"],
 )
 
-app.include_router(
-    fastapi_users.get_verify_router(UserRead),
-    prefix="/auth",
-    tags=["auth"],
-)
-
 app.include_router(router_pages)
+app.include_router(router_auth)
+app.include_router(router_posts)
 
 if __name__ == "__main__":
     uvicorn.run(
