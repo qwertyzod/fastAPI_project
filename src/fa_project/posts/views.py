@@ -17,3 +17,7 @@ router = APIRouter(tags=['Посты'], prefix='/posts')
 async def create_post(post_data: PostCreate, session: Annotated[AsyncSession, Depends(async_session)],
                       user: User = Depends(current_active_user)):
     return await post.create_post(session=session, post_data=post_data, user=user)
+
+@router.get('/get_posts')
+async def get_posts(user: User = Depends(current_active_user)):
+    return await post.get_posts(user=user)

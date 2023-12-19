@@ -11,10 +11,11 @@ if TYPE_CHECKING:
 
 class Post(Base):
     __tablename__ = "post"
-    __table_args__ = {'extend_existing': True}
+    # __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     content: Mapped[str] = mapped_column(String, nullable=False)
     image: Mapped[str] = mapped_column(String)
 
-    user: Mapped[list['User']] = relationship(back_populates="post", lazy="joined")
+    user_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE', name='fk_post_user_id'), nullable=True)
+    user: Mapped['User'] = relationship(back_populates="post", lazy="joined")

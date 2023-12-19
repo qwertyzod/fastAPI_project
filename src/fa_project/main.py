@@ -5,13 +5,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 
 
-from auth.auth import auth_backend, fastapi_users
+from src.fa_project.auth.auth import auth_backend, fastapi_users
 from settings import settings
 
 from src.fa_project.users.schemas import UserRead, UserCreate
-from pages.router import router as router_pages
-from auth.router import router as router_auth
-from posts.views import router as router_posts
+from src.fa_project.pages.router import router as router_pages
+from src.fa_project.auth.router import router as router_auth
+from src.fa_project.posts.views import router as router_posts
 
 
 

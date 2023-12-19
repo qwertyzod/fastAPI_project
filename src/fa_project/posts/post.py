@@ -18,3 +18,6 @@ async def create_post(session: AsyncSession, post_data: PostCreate, user: User) 
     await session.commit()
     await session.refresh(post)
     return post
+
+async def get_posts(user: User):
+    return user.post
