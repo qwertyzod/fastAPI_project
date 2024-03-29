@@ -5,7 +5,7 @@ import uuid
 from fastapi_users import FastAPIUsers
 
 from src.fa_project.users.manager import get_user_manager
-from src.fa_project.users.models import User
+from src.fa_project.models import User
 
 from src.fa_project.settings import settings
 

@@ -5,7 +5,7 @@ from fastapi import Depends, Request
 from fastapi_users import BaseUserManager, UUIDIDMixin, schemas
 from fastapi_users.schemas import model_dump
 
-from src.fa_project.users.models import User
+from src.fa_project.models import User
 from database.db_helper import get_user_db
 from settings import settings
 from src.fa_project.users.schemas import UserCreate

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends
 
-from src.fa_project.users.models import User
+from src.fa_project.models import User
 from users.dependencises import current_active_user
 from users.schemas import UserRead
 

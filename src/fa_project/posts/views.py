@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from database.db_helper import async_session
-from src.fa_project.users.models import User
+from src.fa_project.models import User
 from src.fa_project.posts import post
 from src.fa_project.posts.schemas import PostCreate
 from users.dependencises import current_active_user

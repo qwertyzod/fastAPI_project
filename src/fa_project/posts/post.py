@@ -2,8 +2,8 @@
 from sqlalchemy import select, insert, delete
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from src.fa_project.posts.models import Post
-from src.fa_project.users.models import User
+from src.fa_project.models import Post
+from src.fa_project.models import User
 from src.fa_project.posts.schemas import PostCreate
 
 
