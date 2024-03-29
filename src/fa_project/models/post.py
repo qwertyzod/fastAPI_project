@@ -6,12 +6,12 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from src.fa_project.database.base import Base
 
 if TYPE_CHECKING:
-    from src.fa_project.users.models import User
+    from models.user import User
+    from models.association import Association
 
 
 class Post(Base):
     __tablename__ = "post"
-    # __table_args__ = {'extend_existing': True}
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(100), nullable=False)
     content: Mapped[str] = mapped_column(String, nullable=False)
@@ -24,3 +24,10 @@ class Post(Base):
         name='fk_post_user_id'
     ), nullable=True)
     user: Mapped['User'] = relationship(back_populates="post", lazy="joined")
+    association_id: Mapped[int] = mapped_column(ForeignKey(
+        'association.id',
+        ondelete='CASCADE',
+        onupdate='CASCADE',
+        name='fk_post_association_id'
+    ), nullable=True)
+    association: Mapped['Association'] = relationship(back_populates="post", lazy="joined")

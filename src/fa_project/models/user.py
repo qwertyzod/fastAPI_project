@@ -8,8 +8,8 @@ from sqlalchemy.orm import mapped_column, Mapped, relationship
 from src.fa_project.database.base import Base
 
 if TYPE_CHECKING:
-    from roles.models import Role
-    from posts.models import Post
+    from models.role import Role
+    from models.post import Post
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
