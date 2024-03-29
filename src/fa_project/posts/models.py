@@ -1,4 +1,3 @@
-import uuid
 from typing import TYPE_CHECKING
 
 from sqlalchemy import String, Integer, ForeignKey
@@ -9,6 +8,7 @@ from src.fa_project.database.base import Base
 if TYPE_CHECKING:
     from src.fa_project.users.models import User
 
+
 class Post(Base):
     __tablename__ = "post"
     # __table_args__ = {'extend_existing': True}
@@ -17,5 +17,10 @@ class Post(Base):
     content: Mapped[str] = mapped_column(String, nullable=False)
     image: Mapped[str] = mapped_column(String)
 
-    user_id: Mapped[int] = mapped_column(ForeignKey('user.id', ondelete='CASCADE', onupdate='CASCADE', name='fk_post_user_id'), nullable=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey(
+        'user.id',
+        ondelete='CASCADE',
+        onupdate='CASCADE',
+        name='fk_post_user_id'
+    ), nullable=True)
     user: Mapped['User'] = relationship(back_populates="post", lazy="joined")

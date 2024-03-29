@@ -12,8 +12,7 @@ from src.fa_project.users.schemas import UserRead, UserCreate
 from src.fa_project.pages.router import router as router_pages
 from src.fa_project.auth.router import router as router_auth
 from src.fa_project.posts.views import router as router_posts
-
-
+from src.fa_project.users.views import router as router_users
 
 
 app = FastAPI(
@@ -49,6 +48,7 @@ app.include_router(
 app.include_router(router_pages)
 app.include_router(router_auth)
 app.include_router(router_posts)
+app.include_router(router_users)
 
 if __name__ == "__main__":
     uvicorn.run(

@@ -11,6 +11,79 @@
                     }
                 })
         }
+
+        function create_post() {
+            let button = document.getElementById('create-post');
+            button.style.display = "none";
+            const cardDiv = document.createElement('div');
+            cardDiv.style.display = "flex";
+            cardDiv.style.flexDirection = "column";
+            const cardInput = document.createElement('div');
+            const cardButton = document.createElement('div')
+            const input1 = document.createElement('input');
+            input1.placeholder = 'Заголовок';
+            const input2 = document.createElement('input');
+            input2.placeholder = 'Содержание';
+            const input3 = document.createElement('input');
+            input3.placeholder = 'Тут будет картинка а пока текст';
+            const cancelButton = document.createElement('button');
+            cancelButton.textContent = 'Отмена';
+            cancelButton.className = 'btn btn-primary';
+            const createButton = document.createElement('button');
+            createButton.textContent = 'Создать пост';
+            createButton.className = 'btn btn-primary';
+            const span = document.createElement('span')
+            span.textContent = 'Создать пост';
+            cardInput.appendChild(input1)
+            cardInput.appendChild(input2)
+            cardInput.appendChild(input3)
+            cardButton.appendChild(cancelButton)
+            cardButton.appendChild(createButton)
+            cardDiv.appendChild(span);
+            cardDiv.appendChild(cardInput);
+            cardDiv.appendChild(cardButton);
+
+
+            cancelButton.addEventListener('click', function() {
+                cardDiv.style.display = "none";
+                button.style.display = "block";
+            });
+
+
+            createButton.addEventListener('click', function() {
+                fetch('/posts/create_post', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        title: input1.value,
+                        content: input2.value,
+                        image: input3.value
+                    })
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.message === "Post created") {
+                            window.location.reload();
+                        }
+                    })
+            })
+            button.insertAdjacentElement('afterend', cardDiv);
+
+        }
+
+        function delete_post(id) {
+            fetch(`/posts/delete_post?post_id=${id}`, {
+                method: 'DELETE',
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === "Post deleted") {
+                        window.location.reload();
+                    }
+                })
+        }
     </script>
 {% endblock %}
 {%  block content %}
@@ -22,5 +95,30 @@
                   <button type="button" class="btn btn-primary" id="button" onclick="logOut()">Выйти</button>
               </div>
           </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+            <div>
+                <h4> Личная информация</h4>
+                <h1>{{ data.name }}</h1>
+                <h1>{{ data.created_at }}</h1>
+                <h1>{{ data.email }}</h1>
+            </div>
+            <div>
+                <h4>Посты</h4>
+                    {% if data.post %}
+                        {% for post in data.post %}
+                            <div style="border: 1px solid black;">
+                                <!-- Ваш код для отображения данных поста -->
+                                <p>{{ post.title }}</p>
+                                <p>{{ post.content }}</p>
+                                <p>{{ post.image }}</p>
+                                <button type="button" class="btn btn-primary" id="{{ post.id }}" onclick="delete_post(id)">Удалить пост</button>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>Постов пока что нет.</p>
+                    {% endif %}
+                <button id="create-post" type="button" class="btn btn-primary" onclick="create_post()">Добавить пост</button>
+            </div>
+        </div>
     </div>
 {% endblock %}

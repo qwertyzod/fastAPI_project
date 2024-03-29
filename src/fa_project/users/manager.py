@@ -1,8 +1,8 @@
 import uuid
 from typing import Optional
 
-from fastapi import Depends, Request, status, HTTPException
-from fastapi_users import BaseUserManager, UUIDIDMixin, schemas, models, exceptions, jwt
+from fastapi import Depends, Request
+from fastapi_users import BaseUserManager, UUIDIDMixin, schemas
 from fastapi_users.schemas import model_dump
 
 from src.fa_project.users.models import User
