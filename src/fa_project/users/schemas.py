@@ -11,7 +11,7 @@ class UserRead(BaseModel):
     id: uuid.UUID
     name: str
     role_id: int
-    post: List[PostRead]
+    post: List[PostRead | None]
 
 
 class UserCreate(schemas.BaseUserCreate):

@@ -25,7 +25,7 @@ def get_auth_page(request: Request):
 
 
 @router.post("/token")
-async def check_token(request: Request):
+async def check_token(request: Request) -> str:
     try:
         if "FastAPI-Auth" in request.cookies:
             data = decode_jwt(

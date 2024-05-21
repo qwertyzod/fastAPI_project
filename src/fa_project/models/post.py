@@ -4,10 +4,12 @@ from sqlalchemy import String, Integer, ForeignKey
 from sqlalchemy.orm import mapped_column, Mapped, relationship
 
 from src.fa_project.database.base import Base
+from src.fa_project.models.association import association_table
 
 if TYPE_CHECKING:
-    from models.user import User
-    from models.association import Association
+    from .user import User
+
+    from .tag import Tag
 
 
 class Post(Base):
@@ -24,10 +26,7 @@ class Post(Base):
         name='fk_post_user_id'
     ), nullable=True)
     user: Mapped['User'] = relationship(back_populates="post", lazy="joined")
-    association_id: Mapped[int] = mapped_column(ForeignKey(
-        'association.id',
-        ondelete='CASCADE',
-        onupdate='CASCADE',
-        name='fk_post_association_id'
-    ), nullable=True)
-    association: Mapped['Association'] = relationship(back_populates="post", lazy="joined")
+    tag: Mapped[list['Tag']] = relationship(
+        secondary=association_table,
+        back_populates="post",
+    )

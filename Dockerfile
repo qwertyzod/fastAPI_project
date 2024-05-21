@@ -4,11 +4,9 @@ RUN mkdir /app
 
 WORKDIR /app
 
-COPY requirements.txt .
+COPY . .
 
 RUN pip install -r requirements.txt
-
-COPY . .
 
 RUN chmod a+x src/fa_project/app.sh
 

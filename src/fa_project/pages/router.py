@@ -35,8 +35,6 @@ async def get_main_page(request: Request, session: AsyncSession = Depends(async_
 @router.get("/profile/{uuid}")
 def get_user_page(request: Request, user: User = Depends(current_active_user)):
     try:
-        for i in user.post:
-            print(dir(i))
         if request.cookies["FastAPI-Auth"]:
             return templates.TemplateResponse(name="user_page.html", context={"request": request, "data": user})
     except KeyError:

@@ -1,6 +1,6 @@
-import uuid
-
 from pydantic import BaseModel
+
+from tags.schemas import TagCreate
 
 
 class PostRead(BaseModel):
@@ -8,13 +8,13 @@ class PostRead(BaseModel):
     title: str
     content: str
     image: str
-    user_name: uuid.UUID
 
 
 class PostCreate(BaseModel):
     title: str
     content: str
     image: str | None
+    tag: TagCreate
 
 
 class PostUpdate(BaseModel):

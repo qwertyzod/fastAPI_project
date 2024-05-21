@@ -1,19 +1,12 @@
-from typing import TYPE_CHECKING
-
-from sqlalchemy import Integer, ForeignKey
-from sqlalchemy.orm import mapped_column, Mapped, relationship
+from sqlalchemy import Column, ForeignKey, Table, Integer, UniqueConstraint
 
 from src.fa_project.database.base import Base
 
-if TYPE_CHECKING:
-    from models.tag import Tag
-    from models.post import Post
-
-
-class Association(Base):
-    __tablename__ = 'association'
-    id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    post: Mapped['Post'] = relationship(back_populates="post", lazy="joined")
-    post_id: Mapped[int] = mapped_column(ForeignKey('post.id'))
-    tag: Mapped['Tag'] = relationship(back_populates="tag", lazy="joined")
-    tag_id: Mapped[int] = mapped_column(ForeignKey('tag.id'))
+association_table = Table(
+    'association',
+    Base.metadata,
+    Column('id', Integer, primary_key=True),
+    Column('post_id', ForeignKey('post.id'), nullable=False),
+    Column('tag_id', ForeignKey('tag.id'), nullable=False),
+    UniqueConstraint('post_id', 'tag_id', name='unique_post_tag'),
+)
